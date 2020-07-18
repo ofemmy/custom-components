@@ -1,4 +1,6 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app). It is a library of custom components made by myself.
+This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+It is a library of custom components made by myself.
 
 ## Available Scripts
 
