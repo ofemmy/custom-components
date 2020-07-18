@@ -20,6 +20,7 @@ function App() {
             setCount(count + 1);
           }}
           rounded
+          block
         >
           Call me
         </Button>
@@ -29,6 +30,7 @@ function App() {
           }}
           size="large"
           color="#323232"
+          block
         >
           Call me
         </Button>

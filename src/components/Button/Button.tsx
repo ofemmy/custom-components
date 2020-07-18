@@ -25,9 +25,27 @@ const StyledButton = styled.button<StyledButtonProps>`
   margin-bottom: 12px;
   font-size: 1.5rem;
   border: 1px solid;
-  &:hover {
-    filter: brightness(1.3);
-  }
+  outline: 0;
+  outline-color: initial;
+  outline-style: initial;
+  outline-width: 0px;
+  &:hover,
+  &:focus,
+  &:active {
+    outline: 0;
+    outline-color: initial;
+    outline-style: initial;
+    outline-width: 0px;
+    filter: brightness(1.9);
+  };
+  ${({ block }) => {
+    if (block) {
+      return css`
+        display: block;
+        width: 100%;
+      `;
+    }
+  }}
   ${({ size }) => {
     switch (size) {
       case "small":
