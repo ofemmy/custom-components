@@ -1,3 +1,3 @@
 export const theme = {
-  dividerColor: "#f0f0f0",
+  dividerColor: "#e0e0e0",
 };

@@ -10,12 +10,26 @@ interface DividerProps {
 interface StyledDividerProps extends DividerProps {}
 
 const StyledDivider = styled.div<StyledDividerProps>`
-  ${(props) => {
-    if (!props.children) {
+  ${({children,theme,color}) => {
+    if (!children) {
       return css`
         border-top: 1px solid;
-        border-top-color: ${props.color || props.theme.dividerColor};
+        border-top-color: ${color || theme.dividerColor};
       `;
+    }
+    else {
+        return css`
+          &::before,
+          &::after {
+            content: "";
+            position: relative;
+            transform: translateY(50%);
+            border-top: 1px solid;
+            border-top-color: ${color || theme.dividerColor};
+            top: 50%;
+            width: 50%;
+          }
+        `
     }
   }};
 
@@ -44,22 +58,6 @@ const StyledDivider = styled.div<StyledDividerProps>`
         `;
     }
   }};
-
-  ${({ children, color,theme }) =>
-    children
-      ? css`
-          &::before,
-          &::after {
-            content: "";
-            position: relative;
-            transform: translateY(50%);
-            border-top: 1px solid;
-            border-top-color: ${color || theme.dividerColor};
-            top: 50%;
-            width: 50%;
-          }
-        `
-      : null};
 
   ${({ position }) => {
     switch (position) {
