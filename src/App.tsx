@@ -19,6 +19,7 @@ function App() {
           onClick={() => {
             setCount(count + 1);
           }}
+          rounded
         >
           Call me
         </Button>

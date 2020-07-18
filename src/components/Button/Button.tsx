@@ -7,10 +7,12 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   typeVariant?: "solid" | "outline" | "link";
   onClick: (e?: React.MouseEvent) => void;
   size?: "default" | "large" | "small";
+  block?: boolean;
+  rounded?: boolean;
 }
 interface StyledButtonProps extends ButtonProps {}
-const StyledButton = styled.div<StyledButtonProps>`
-  border-radius: 3px;
+const StyledButton = styled.button<StyledButtonProps>`
+  border-radius: ${(props) => (props.rounded ? "24px" : "3px")};
   text-align: center;
   transition: all 0.2s;
   white-space: no-wrap;
@@ -70,25 +72,8 @@ const StyledButton = styled.div<StyledButtonProps>`
   }}
 `;
 
-const Button = ({
-  children,
-  onClick,
-  color,
-  typeVariant,
-  size,
-  onHoverColor,
-}: ButtonProps) => {
-  return (
-    <StyledButton
-      onClick={onClick}
-      color={color}
-      typeVariant={typeVariant || "solid"}
-      size={size || "default"}
-      onHoverColor={onHoverColor}
-    >
-      {children}
-    </StyledButton>
-  );
+const Button = ({ children, ...otherProps }: ButtonProps) => {
+  return <StyledButton {...otherProps}>{children}</StyledButton>;
 };
 
 export default Button;
