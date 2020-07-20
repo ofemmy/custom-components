@@ -51,6 +51,7 @@ svg{
     outline-width: 0px;
     filter: brightness(1.9);
   };
+  :disabled { opacity: 0.5; cursor: not-allowed;filter: none; }
   ${({ block }) => {
     if (block) {
       return css`

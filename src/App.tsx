@@ -52,9 +52,11 @@ function App() {
         <Button
         onClick={()=>{}}
         iconRight={MdArrowForward}
+        disabled
         >
           Sign up
         </Button>
+        <button disabled>Hi there</button>
       </div>
     </div>
   );
