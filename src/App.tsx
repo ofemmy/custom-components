@@ -1,6 +1,7 @@
-import React, { useState } from "react";
+import React, { useState} from "react";
 import Divider from "./components/Divider";
 import Button from "./components/Button";
+import { MdEmail, MdAutorenew, MdArrowForward} from "react-icons/md";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -19,6 +20,8 @@ function App() {
           onClick={() => {
             setCount(count + 1);
           }}
+          iconLeft={MdEmail}
+          iconRight={MdEmail}
           rounded
           block
         >
@@ -29,7 +32,7 @@ function App() {
             setCount(count + 1);
           }}
           size="large"
-          color="#323232"
+          color="cyan"
           block
         >
           Call me
@@ -41,12 +44,19 @@ function App() {
           size="small"
           typeVariant="outline"
           color="red"
+          iconRight={MdAutorenew}
         >
           Call me
+        </Button>
+        <Divider position="center">Icons</Divider>
+        <Button
+        onClick={()=>{}}
+        iconRight={MdArrowForward}
+        >
+          Sign up
         </Button>
       </div>
     </div>
   );
 }
-
 export default App;

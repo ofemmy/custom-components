@@ -1,5 +1,6 @@
 import React from "react";
 import styled, { css } from "styled-components";
+import { IconType } from "react-icons/lib";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   color?: string;
@@ -9,15 +10,27 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   size?: "default" | "large" | "small";
   block?: boolean;
   rounded?: boolean;
+  iconRight?: IconType;
+  iconLeft?: IconType;
 }
 interface StyledButtonProps extends ButtonProps {}
 const StyledButton = styled.button<StyledButtonProps>`
+svg{ 
+    display: inline-block;
+    vertical-align: middle;
+    margin-left: 0.5rem;
+    margin-bottom:0.4rem;
+    margin-right: 0.5rem;
+    flex-shrink: 0;
+    backface-visibility: hidden;
+}
   border-radius: ${(props) => (props.rounded ? "24px" : "3px")};
   text-align: center;
   transition: all 0.2s;
   white-space: no-wrap;
+  vertical-align:middle;
   display: inline-block;
-  line-height: 1.5715;
+  line-height: 1.7;
   position: relative;
   cursor: pointer;
   color: #ffff;
@@ -90,8 +103,20 @@ const StyledButton = styled.button<StyledButtonProps>`
   }}
 `;
 
-const Button = ({ children, ...otherProps }: ButtonProps) => {
-  return <StyledButton {...otherProps}>{children}</StyledButton>;
+const Button = ({
+  iconLeft,
+  iconRight,
+  children,
+  ...otherProps
+}: ButtonProps) => {
+  console.log(iconLeft);
+  return (
+    <StyledButton {...otherProps}>
+      {iconLeft ? iconLeft({}) : null}
+      {children}
+      {iconRight ? iconRight({}) : null}
+    </StyledButton>
+  );
 };
 
 export default Button;
