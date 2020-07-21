@@ -18,6 +18,7 @@ function App() {
     <div>
       <h1>My react components</h1>
       <p>{count}</p>
+      <Card />
     </div>
   );
 }
