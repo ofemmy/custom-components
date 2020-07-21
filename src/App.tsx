@@ -1,7 +1,8 @@
-import React, { useState} from "react";
+import React, { useState } from "react";
 import Divider from "./components/Divider";
 import Button from "./components/Button";
-import { MdEmail, MdAutorenew, MdArrowForward} from "react-icons/md";
+import { MdEmail, MdAutorenew, MdArrowForward } from "react-icons/md";
+import { Loader, Spinner } from "./components/Loader";
 
 function App() {
   const [count, setCount] = useState(0);
@@ -49,15 +50,13 @@ function App() {
           Call me
         </Button>
         <Divider position="center">Icons</Divider>
-        <Button
-        onClick={()=>{}}
-        iconRight={MdArrowForward}
-        disabled
-        >
+        <Button onClick={() => {}} iconRight={MdArrowForward} disabled>
           Sign up
         </Button>
-        <button disabled>Hi there</button>
+        <Divider />
       </div>
+      <Spinner/>
+      <Loader size="md"/>
     </div>
   );
 }
