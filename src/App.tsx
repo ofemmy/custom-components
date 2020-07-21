@@ -3,7 +3,7 @@ import React, { useState } from "react";
 // import Button from "./components/Button";
 // import { MdEmail, MdAutorenew, MdArrowForward } from "react-icons/md";
 // import { Loader, Spinner } from "./components/Loader";
-import Card from "./components/Card";
+import Notification from "./components/Notification";
 function App() {
   const [count, setCount] = useState(0);
   const [isLoading, setLoading] = useState(false);
@@ -18,7 +18,7 @@ function App() {
     <div>
       <h1>My react components</h1>
       <p>{count}</p>
-      <Card />
+      <Notification />
     </div>
   );
 }
