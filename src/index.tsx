@@ -13,6 +13,7 @@ body {
   -moz-osx-font-smoothing: grayscale;
   padding:20px;
   font-size: 1.5rem;
+  background:#fafafa;
 };
 html {
   font-size: 62.5%;
