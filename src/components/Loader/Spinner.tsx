@@ -11,16 +11,17 @@ const StyledSpinner = styled.div<SpinnerProps>`
   width: 10rem;
   height: 10rem;
   border-radius: 50%;
+  margin-right: 0.5rem;
   display: inline-block;
   border: 4px solid #f1f1f1;
-  border-top-color: ${(props) => props.theme.primary};
+  border-top-color: ${({ color, theme }) => (color ? color : theme.primary)};
   animation: 0.8s ${spin} infinite ease-in-out;
   ${({ size }) => {
     switch (size) {
       case "sm":
         return css`
-          width: 2rem;
-          height: 2rem;
+          width: 1.2rem;
+          height: 1.2rem;
           border-width: 1.5px;
         `;
       case "md":

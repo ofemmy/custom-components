@@ -11,9 +11,11 @@ const bounce = keyframes`
 
 `;
 const StyledLoader = styled.div<OLoaderProps>`
+  display: inline-block;
+  margin-right: 0.5rem;
   & > div {
-    background-color: ${({ loaderColor, theme }) =>
-      loaderColor ? loaderColor : theme.primary};
+    background-color: ${({ color, theme }) =>
+      color ? color : theme.primary};
     border-radius: 50%;
     display: inline-block;
     animation: 1.5s ${bounce} infinite ease-in-out both;
@@ -45,7 +47,7 @@ const StyledLoader = styled.div<OLoaderProps>`
   }
 `;
 interface OLoaderProps extends React.HTMLAttributes<HTMLDivElement> {
-  loaderColor?: string;
+  color?: string;
   size?: "sm" | "md" | "lg";
 }
 export const OLoader = ({ size, ...otherProps }: OLoaderProps) => {

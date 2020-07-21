@@ -6,6 +6,14 @@ import { Loader, Spinner } from "./components/Loader";
 
 function App() {
   const [count, setCount] = useState(0);
+  const [isLoading, setLoading] = useState(false);
+
+  const submitHandler = () => {
+    setLoading(true);
+    setTimeout(() => {
+      setLoading(false);
+    }, 2000);
+  };
   return (
     <div>
       <h1>My react components</h1>
@@ -25,6 +33,7 @@ function App() {
           iconRight={MdEmail}
           rounded
           block
+          loading={isLoading}
         >
           Call me
         </Button>
@@ -35,28 +44,33 @@ function App() {
           size="large"
           color="cyan"
           block
+          loading={isLoading}
         >
           Call me
         </Button>
         <Button
-          onClick={() => {
-            setCount(count + 1);
-          }}
+          onClick={submitHandler}
+          loading={isLoading}
           size="small"
           typeVariant="outline"
           color="red"
           iconRight={MdAutorenew}
+          block
         >
           Call me
         </Button>
         <Divider position="center">Icons</Divider>
-        <Button onClick={() => {}} iconRight={MdArrowForward} disabled>
+        <Button
+          onClick={submitHandler}
+          iconRight={MdArrowForward}
+          loading={isLoading}
+        >
           Sign up
         </Button>
         <Divider />
       </div>
-      <Spinner/>
-      <Loader size="md"/>
+      <Spinner />
+      <Loader size="md" />
     </div>
   );
 }

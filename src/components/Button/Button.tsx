@@ -1,6 +1,7 @@
 import React from "react";
 import styled, { css } from "styled-components";
 import { IconType } from "react-icons/lib";
+import { Loader } from "../Loader";
 interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   children?: React.ReactNode;
   color?: string;
@@ -12,6 +13,8 @@ interface ButtonProps extends React.ButtonHTMLAttributes<HTMLButtonElement> {
   rounded?: boolean;
   iconRight?: IconType;
   iconLeft?: IconType;
+  loading?: boolean;
+  loadingText?: string;
 }
 interface StyledButtonProps extends ButtonProps {}
 const StyledButton = styled.button<StyledButtonProps>`
@@ -108,14 +111,22 @@ const Button = ({
   iconLeft,
   iconRight,
   children,
+  loading,
+  color,
+  loadingText = "Submitting",
   ...otherProps
 }: ButtonProps) => {
-  console.log(iconLeft);
   return (
-    <StyledButton {...otherProps}>
-      {iconLeft ? iconLeft({}) : null}
-      {children}
-      {iconRight ? iconRight({}) : null}
+    <StyledButton color={color} {...otherProps} disabled={loading}>
+      {loading ? (
+        <Loader
+          size="sm"
+          color={otherProps.typeVariant === "outline" ? color : "#fff"}
+        />
+      ) : null}
+      {iconLeft && !loading ? iconLeft({}) : null}
+      {loading ? `${loadingText}...` : children}
+      {iconRight && !loading ? iconRight({}) : null}
     </StyledButton>
   );
 };
