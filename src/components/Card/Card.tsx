@@ -1,5 +1,5 @@
 import React from "react";
-import styled from "styled-components";
+import styled, { css, Keyframes } from "styled-components";
 
 const StyledCard = styled.div<CardProp>`
   max-width: ${({ width }) => (width ? width : "40rem")};
@@ -8,13 +8,17 @@ const StyledCard = styled.div<CardProp>`
   border-radius: 3px;
   background: ${({ color }) => (color ? color : "#fff")};
   padding: 1.6rem;
+  animation: ${({ animation }) =>
+    animation!.type ? css`0.35s ${animation?.type} ease-in-out forwards` : null};
 `;
 interface CardProp extends React.HTMLAttributes<HTMLDivElement> {
   width?: string;
   height?: string;
   color?: string;
+  animation?: { type: Keyframes };
 }
 const Card = (props: CardProp) => {
+  console.log(props.animation);
   return <StyledCard {...props}>{props.children}</StyledCard>;
 };
 

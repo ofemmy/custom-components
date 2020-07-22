@@ -1,5 +1,5 @@
 import React, { useState } from "react";
- import Divider from "./components/Divider";
+import Divider from "./components/Divider";
 // import Button from "./components/Button";
 // import { MdEmail, MdAutorenew, MdArrowForward } from "react-icons/md";
 // import { Loader, Spinner } from "./components/Loader";
@@ -15,7 +15,6 @@ function App() {
         I wanna thank you. This is a notification title that was written by me and 
         I wanna thank you"
         type="error"
-        position="topLeft"
       />
     </div>
   );

@@ -1,7 +1,8 @@
 import React, { HTMLAttributes } from "react";
-import styled from "styled-components";
+import styled, { Keyframes } from "styled-components";
 import { MdClose } from "react-icons/md";
 import Card from "../Card";
+import { slideInFromRight, slideInFromLeft } from "./animations";
 const StyledNotification = styled.div<NotificationProps>`
   .header {
     display: flex;
@@ -43,34 +44,39 @@ let colorMap = new Map<NotificationProps["type"], String>([
 
 const Notification = (props: NotificationProps) => {
   const { type, position = "topRight" } = props;
-  let positionObj: PositionType = { position: "absolute" };
+  let positionConfig: PositionType = { position: "absolute" };
+  let animationConfig: { type: Keyframes } = { type: slideInFromRight }; //default
   switch (position) {
     case "topRight":
-      positionObj.top = "3%";
-      positionObj.right = "3%";
+      positionConfig.top = "3%";
+      positionConfig.right = "3%";
       break;
     case "topLeft":
-      positionObj.top = "3%";
-      positionObj.left = "3%";
+      positionConfig.top = "3%";
+      positionConfig.left = "3%";
+      animationConfig.type = slideInFromLeft;
       break;
     case "bottomLeft":
-      positionObj.bottom = "3%";
-      positionObj.left = "3%";
+      positionConfig.bottom = "3%";
+      positionConfig.left = "3%";
+      animationConfig.type = slideInFromLeft;
       break;
     case "bottomRight":
-      positionObj.bottom = "3%";
-      positionObj.right = "3%";
+      positionConfig.bottom = "3%";
+      positionConfig.right = "3%";
       break;
     default:
       break;
   }
+
   return (
     <Card
       style={{
         borderLeft: `4px solid ${colorMap.get(type)}`,
-        zIndex:100,
-        ...positionObj,
+        zIndex: 100,
+        ...positionConfig,
       }}
+      animation={animationConfig}
     >
       <StyledNotification {...props}>
         <div className="header">
