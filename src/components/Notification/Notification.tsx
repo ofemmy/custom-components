@@ -8,7 +8,7 @@ import {
 } from "react-icons/md";
 import Card from "../Card";
 import { slideInFromRight, slideInFromLeft } from "./animations";
-import { IconType } from "react-icons/lib";
+
 const StyledNotification = styled.div<NotificationProps>`
   .header {
     display: flex;
@@ -42,12 +42,6 @@ interface PositionType {
   position: "absolute";
   [values: string]: string;
 }
-// let colorMap = new Map<NotificationProps["type"], string>([
-//   ["info", "#fff"],
-//   ["error", "red"],
-//   ["success", "green"],
-//   ["warning", "#f0a500"],
-// ]);
 
 const Notification = (props: NotificationProps) => {
   const [isOpen, setOpen] = useState(true);
@@ -100,7 +94,6 @@ const Notification = (props: NotificationProps) => {
     ["success", { color: "green", icon: <MdCheckCircle color="green" /> }],
     ["warning", { color: "#F0A500", icon: <MdInfoOutline color="#F0A500" /> }],
   ]);
-
 
   //Notification component
   const comp = (
