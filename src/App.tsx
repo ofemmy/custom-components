@@ -1,4 +1,4 @@
-import React, {  } from "react";
+import React from "react";
 import Divider from "./components/Divider";
 // import Button from "./components/Button";
 // import { MdEmail, MdAutorenew, MdArrowForward } from "react-icons/md";
@@ -14,7 +14,7 @@ function App() {
         message="This is a notification title that was written by me and 
         I wanna thank you. This is a notification title that was written by me and 
         I wanna thank you"
-        type="info"
+        type="error"
       />
     </div>
   );
