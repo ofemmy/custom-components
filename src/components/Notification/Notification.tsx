@@ -1,4 +1,4 @@
-import React, { HTMLAttributes } from "react";
+import React, { HTMLAttributes, useState, MouseEvent, useEffect } from "react";
 import styled, { Keyframes } from "styled-components";
 import { MdClose } from "react-icons/md";
 import Card from "../Card";
@@ -29,20 +29,21 @@ interface NotificationProps extends HTMLAttributes<HTMLDivElement> {
   message: string;
   type: "info" | "success" | "error" | "warning";
   position?: "topLeft" | "topRight" | "bottomLeft" | "bottomRight";
-  duration?: string;
+  duration?: Number;
 }
 interface PositionType {
   position: "absolute";
   [values: string]: string;
 }
 let colorMap = new Map<NotificationProps["type"], String>([
-  ["info", "blue"],
+  ["info", "#fff"],
   ["error", "red"],
   ["success", "green"],
   ["warning", "#f0a500"],
 ]);
 
 const Notification = (props: NotificationProps) => {
+  const [isOpen, setOpen] = useState(true);
   const { type, position = "topRight" } = props;
   let positionConfig: PositionType = { position: "absolute" };
   let animationConfig: { type: Keyframes } = { type: slideInFromRight }; //default
@@ -68,8 +69,23 @@ const Notification = (props: NotificationProps) => {
     default:
       break;
   }
+  //close after duration
+  useEffect(() => {
+    const timer = setTimeout(() => {
+      setOpen(false);
+    }, props.duration  || 5000);
+    return () => clearTimeout(timer);
+  }, [props.duration]);
 
-  return (
+  
+  //close notification
+  const closeHandler = (e: MouseEvent<HTMLAnchorElement>) => {
+    e.preventDefault();
+    setOpen(false);
+  };
+
+  //Notification component
+  const comp = (
     <Card
       style={{
         borderLeft: `4px solid ${colorMap.get(type)}`,
@@ -81,7 +97,7 @@ const Notification = (props: NotificationProps) => {
       <StyledNotification {...props}>
         <div className="header">
           <p className="title">{props.title}</p>
-          <a href="/" className="close">
+          <a href="/" className="close" onClick={closeHandler}>
             <MdClose />
           </a>
         </div>
@@ -91,6 +107,8 @@ const Notification = (props: NotificationProps) => {
       </StyledNotification>
     </Card>
   );
+
+  return isOpen ? comp : null;
 };
 
 export default Notification;
