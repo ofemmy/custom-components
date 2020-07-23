@@ -18,7 +18,6 @@ interface CardProp extends React.HTMLAttributes<HTMLDivElement> {
   animation?: { type: Keyframes };
 }
 const Card = (props: CardProp) => {
-  console.log(props.animation);
   return <StyledCard {...props}>{props.children}</StyledCard>;
 };
 
