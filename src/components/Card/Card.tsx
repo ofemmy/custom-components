@@ -8,8 +8,12 @@ const StyledCard = styled.div<CardProp>`
   border-radius: 3px;
   background: ${({ color }) => (color ? color : "#fff")};
   padding: 1.6rem;
-  animation: ${({ animation }) =>
-    animation!.type ? css`0.35s ${animation?.type} ease-in-out forwards` : null};
+  animation: ${({ animation }) =>{
+    if(animation){
+      return css`0.35s ${animation?.type} ease-in-out forwards`;
+    }
+    return null;
+  }}
 `;
 interface CardProp extends React.HTMLAttributes<HTMLDivElement> {
   width?: string;
