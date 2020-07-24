@@ -1,12 +1,13 @@
-import React, { useRef } from "react";
-import styled from "styled-components";
+import React, { HTMLAttributes, ChangeEvent } from "react";
+import styled, { css } from "styled-components";
 import { MdArrowDropDown } from "react-icons/md";
+import { IconType } from "react-icons/lib";
 const StyledContainer = styled.div`
   position: relative;
   width: 100%;
 `;
-const StyledSelect = styled.select`
-  background: transparent;
+const StyledSelect = styled.select<SelectProps>`
+  border-color: ${({ theme }) => theme.primary};
   appearance: none;
   width: 100%;
   display: flex;
@@ -16,8 +17,30 @@ const StyledSelect = styled.select`
   padding: 1rem 2rem 1rem 2rem;
   color: inherit;
   border-radius: 0.25rem;
-  border: 1px solid red;
+  border: 1px solid;
   line-height: normal;
+  ${({ variant, theme }) => {
+    switch (variant) {
+      case "fill":
+        return css`
+          background: ${theme.accent};
+          border: none;
+        `;
+      case "outline":
+        return css`
+          border-color: ${theme.accent};
+        `;
+      case "no-border":
+        return css`
+          border: none;
+        `;
+      case "underline":
+        return css`
+          border: none;
+          border-bottom: 2px solid ${theme.accent};
+        `;
+    }
+  }}
 `;
 
 const StyledIconDiv = styled.div`
@@ -32,24 +55,34 @@ const StyledIconDiv = styled.div`
   padding: 0.6rem;
   pointer-events: none;
 `;
-const Select = () => {
-  const selectRef = useRef<HTMLSelectElement>(null);
-  const clickHandler = () => {
-    console.log(selectRef);
-    if (selectRef.current) selectRef.current.selectedIndex = 1;
-  };
+interface SelectProps extends HTMLAttributes<HTMLSelectElement> {
+  variant?: "outline" | "fill" | "underline" | "no-border";
+  icon?: IconType;
+  placeholder?: string;
+  borderColor?: string;
+  backgroundColor?: string;
+}
+
+const Select = ({
+  variant,
+  placeholder,
+  children,
+  icon,
+  ...otherProps
+}: SelectProps) => {
   return (
     <StyledContainer>
-      <StyledSelect ref={selectRef}>
-        <option>Option 1</option>
-        <option>Option 2</option>
-        <option>Option 3</option>
-        <option>Option 4</option>
-        <option>Option 5</option>
+      <StyledSelect
+        variant={variant ? variant : "outline"}
+        {...otherProps}
+        defaultValue={"DEFAULT"}
+      >
+        <option value="DEFAULT" disabled hidden>
+          {placeholder}
+        </option>
+        {children}
       </StyledSelect>
-      <StyledIconDiv>
-        <MdArrowDropDown />
-      </StyledIconDiv>
+      <StyledIconDiv>{icon ? icon({}) : <MdArrowDropDown />}</StyledIconDiv>
     </StyledContainer>
   );
 };
